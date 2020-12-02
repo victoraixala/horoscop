@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Angle</string>
+    <string name="action_settings">Configuració</string>
+    <string name="novaPersona">New person</string>
+    <string name="tvNovaPersona">Introdueix les dades natals de la nova persona:</string>
+    <string name="natal">Veure dades natals</string>
+    <string name="transits">Trànsits</string>
+    <string name="pSecund">Progressions secundàries</string>
+    <string name="dPrim">Direccions primàries</string>
+    <string name="dSimb">Direccions simbòliques</string>
+    <string name="rSolar">Revolució solar</string>
+    <string name="rLunar">Revolució lunar</string>
+    <string name="sinastria">Sinastria</string>
+    <string name="composta">Carta composta</string>
+    <string name="tvNom">Nom</string>
+    <string name="tvDia">Dia de naixement</string>
+    <string name="tvHora">Hora de naixement</string>
+    <string name="tvLatitud">Latitud</string>
+    <string name="tvLongitud">Longitud</string>
+    <string name="tvAltitud">Altitud (en metres)</string>
+    <string name="tvZona">Zona horària</string>
+    <string name="tvUT">UT</string>
+    <string name="btGravar">Gravar dades</string>
+    <string name="erInputNom">Falta informar el nom</string>
+    <string name="erInputNomR">Aquest nom ja existeix. Posa un altre</string>
+    <string name="erInputDia">Falta informar el dia de naixement</string>
+    <string name="erInputDiaI">La data de naixement està mal informada</string>
+    <string name="erInputHora">Falta informar l\'hora de naixement</string>
+    <string name="erInputHoraI">L\'hora de naixement està mal informada</string>
+    <string name="erInputLatitud">Falta informar la latitud</string>
+    <string name="erInputLatitudI">La latitud està mal informada</string>
+    <string name="erInputLongitud">Falta informar la longitud</string>
+    <string name="erInputLongitudI">La longitud està mal informada</string>
+    <string name="erInputAltitud">Falta informar l\'altitud</string>
+    <string name="erInputAltitudI">L\'altitud ha de ser numèrica</string>
+    <string name="dadesGravades">Les dades s\'han gravat correctament</string>
+    <string name="dadesNoGravades">Error al gravar les dades</string>
+    <string name="mateixaFinestra">Ja et trobes a aquesta opció</string>
+    <string name="altaPersona">You have to create at least one natal chart</string>
+    <string name="coordenades">Location</string>
+    <string name="sol">Sun</string>
+    <string name="lluna">Moon</string>
+    <string name="mercuri">Mercury</string>
+    <string name="venus">Venus</string>
+    <string name="mart">Mars</string>
+    <string name="jupiter">Jupiter</string>
+    <string name="saturn">Saturn</string>
+    <string name="ura">Uranus</string>
+    <string name="neptu">Neptune</string>
+    <string name="pluto">Pluto</string>
+    <string name="nodeNord">North Node</string>
+    <string name="nodeSud">South Node</string>
+    <string name="fortuna">Fortune</string>
+    <string name="quiro">Chiron</string>
+
+</resources>

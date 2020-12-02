@@ -1,0 +1,1 @@
+include ':app', ':features:novapersona', ':features:transits', ':common', ':swisseph'

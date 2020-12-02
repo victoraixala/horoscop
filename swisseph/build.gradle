@@ -1,0 +1,2 @@
+configurations.maybeCreate("default")
+artifacts.add("default", file('swissephSWI-2.00.00-01.jar'))

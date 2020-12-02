@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.widget.TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TableRow>
+        <TextView
+                android:id="@+id/tvNom"
+                android:text="@+str/tvNom"
+                android:layout_width="match_parent"
+                android:layout_height="16dp"
+                android:typeface="monospace"
+                android:scrollHorizontally="true"/>
+    </TableRow>
+    <TableRow>
+        <EditText
+                android:id="@+id/etNom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="" />
+    </TableRow>
+    <TableRow>
+        <TextView
+                android:id="@+id/tvDia"
+                android:text="@+str/tvDia"
+                android:layout_width="match_parent"
+                android:layout_height="16dp"
+                android:typeface="monospace"
+                android:scrollHorizontally="true"/>
+    </TableRow>
+    <TableRow>
+        <EditText
+                android:id="@+id/etDia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="date" />
+    </TableRow>
+    <TableRow>
+        <TextView
+                android:id="@+id/tvHora"
+                android:text="@+str/tvHora"
+                android:layout_width="match_parent"
+                android:layout_height="16dp"
+                android:typeface="monospace"
+                android:scrollHorizontally="true"/>
+    </TableRow>
+    <TableRow>
+        <EditText
+                android:id="@+id/etHora"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="time" />
+    </TableRow>
+    <TableRow>
+        <TextView
+                android:id="@+id/tvLatitud"
+                android:text="@+str/tvLatitud"
+                android:layout_width="match_parent"
+                android:layout_height="16dp"
+                android:typeface="monospace"
+                android:scrollHorizontally="true"/>
+    </TableRow>
+    <TableRow>
+        <EditText
+                android:id="@+id/etLatitud"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="time"
+                android:text="" />
+        <Spinner
+                android:id="@+id/spNS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+    </TableRow>
+    <TableRow>
+        <TextView
+                android:id="@+id/tvLongitud"
+                android:text="@+str/tvLongitud"
+                android:layout_width="match_parent"
+                android:layout_height="16dp"
+                android:typeface="monospace"
+                android:scrollHorizontally="true"/>
+    </TableRow>
+    <TableRow>
+        <EditText
+                android:id="@+id/etLongitud"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="time"
+                android:text="" />
+        <Spinner
+                android:id="@+id/spEW"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+    </TableRow>
+    <TableRow>
+        <TextView
+                android:id="@+id/tvAltitud"
+                android:text="@+str/tvAltitud"
+                android:layout_width="match_parent"
+                android:layout_height="16dp"
+                android:typeface="monospace"
+                android:scrollHorizontally="true"/>
+    </TableRow>
+    <TableRow>
+        <EditText
+                android:id="@+id/etAltitud"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number" />
+    </TableRow>
+    <TableRow>
+        <TextView
+                android:id="@+id/tvZona"
+                android:text="@+str/tvZona"
+                android:layout_width="match_parent"
+                android:layout_height="16dp"
+                android:typeface="monospace"
+                android:scrollHorizontally="true"/>
+    </TableRow>
+
+    <TableRow>
+        <TextView
+                android:id="@+id/tvUT"
+                android:text="@+str/tvUT"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:typeface="monospace"
+                android:scrollHorizontally="true"/>
+        <Spinner
+                android:id="@+id/spZona"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+    </TableRow>
+
+    <TableRow>
+        <Button
+                android:id="@+id/btGravar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@+str/btGravar"
+                android:onClick="gravarNatal"/>
+    </TableRow>
+
+    <TableRow>
+        <TextView
+                android:id="@+id/tvFitxer"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:typeface="monospace"
+                android:scrollHorizontally="true"/>
+    </TableRow>
+</android.widget.TableLayout>
