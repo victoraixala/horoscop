@@ -7,20 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+//import androidx.lifecycle.ViewModelProviders
 import com.aldarius.common.Aspecte
 import com.aldarius.common.Persona
-import kotlinx.android.synthetic.main.transits_fragment.*
+//import kotlinx.android.synthetic.main.transits_fragment.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.abs
 
 
 class TransitsFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = TransitsFragment()
-    }
 
     private lateinit var viewModel: TransitsViewModel
     private var retView: View? = null
@@ -46,18 +42,19 @@ class TransitsFragment : Fragment() {
         return retView
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(TransitsViewModel::class.java)
+        //super.onActivityCreated(savedInstanceState)
+        //viewModel = ViewModelProviders.of(this).get(TransitsViewModel::class.java)
         viewModel.fitxerPosicions(rutaAssets!!)
         persones = viewModel.recuperarPersones(rutaPersones!!)
 
-        val adaptador1 = ArrayAdapter(this.context, android.R.layout.simple_spinner_item, persones)
-        spPersones!!.adapter = adaptador1
+        //val adaptador1 = ArrayAdapter(this.context, android.R.layout.simple_spinner_item, persones)
+        //spPersones!!.adapter = adaptador1
 
-        persona = viewModel.carregarPersona(
-            rutaPersones.toString(),
-            spPersones!!.selectedItem.toString())
+        //persona = viewModel.carregarPersona(
+            //rutaPersones.toString(),
+            //spPersones!!.selectedItem.toString())
 
         // dia i hora
         val c = Calendar.getInstance()
@@ -76,11 +73,11 @@ class TransitsFragment : Fragment() {
                 altitud = location.altitude
 
                 val coordenades = convert(location.latitude, location.longitude)
-                strLatitud = coordenades?.get(0) ?: ""
-                strLongitud = coordenades?.get(1) ?: ""
+                strLatitud = coordenades[0]
+                strLongitud = coordenades[1]
                 strAltitud = location.altitude.toString() + " m."
 
-                if (latitud != null && longitud != null && altitud != null && carregat == false) {
+                if (latitud != null && longitud != null && altitud != null && !carregat) {
                     // zona horària de les dades natals de la persona
                     // TODO poder canviar la zona horària a una altra diferent del naixement
                     // dia/hora, latitud, longitud, altitud i zona horària
@@ -94,7 +91,7 @@ class TransitsFragment : Fragment() {
                     )
 
                     val aspectes = viewModel.buscarAspectes(persona!!, posicionsActuals!!)
-                    aspectes.sortedWith(compareBy({ it.momentExacte }))
+                    aspectes.sortedWith(compareBy { it.momentExacte })
                     mostrarAspectes(aspectes)
                 }
             }
@@ -135,7 +132,7 @@ class TransitsFragment : Fragment() {
 29 = {Aspecte@5088} "Aspecte(ePersona=Entitat(nom=Vesta, grau=281.99699413997934, retrograd=D, tipus=Asteroide, casa=C8), tipusAspecte=270.0, eActual=Entitat(nom=Fortuna, grau=13.636709987700158, retrograd= , tipus=Part, casa=C11), distancia=-1.6397158477208222, apliSepa=S, momentExacte=20190402004954, grauExacteActual=11.996999369022127)"
      */
 
-    private fun convert(latitud: Double, longitud: Double): List<String>? {
+    private fun convert(latitud: Double, longitud: Double): List<String> {
         val coordenades = ArrayList<String>()
 
         val latitudeDegrees = Location.convert(
@@ -172,9 +169,9 @@ class TransitsFragment : Fragment() {
 
     fun mostrarAspectes(aspectes: ArrayList<Aspecte>) {
 
-        tvLatitud.text = strLatitud
-        tvLongitud.text = strLongitud
-        tvAltitud.text = strAltitud
+        //tvLatitud.text = strLatitud
+        //tvLongitud.text = strLongitud
+        //tvAltitud.text = strAltitud
 
         /*
         // zona: +xx:00

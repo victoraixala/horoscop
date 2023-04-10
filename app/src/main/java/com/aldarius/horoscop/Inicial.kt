@@ -68,7 +68,6 @@ class Inicial : AppCompatActivity() {
         if (supportFragmentManager.findFragmentByTag("NovaPersonaFragment") != null) {
             supportFragmentManager.popBackStackImmediate()
         } else {
-            super.onBackPressed()
             transitsONovaPersona()
         }
     }

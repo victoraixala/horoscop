@@ -2,21 +2,16 @@ package com.aldarius.novapersona
 
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
-import com.ikovac.timepickerwithseconds.MyTimePickerDialog
-import com.ikovac.timepickerwithseconds.TimePicker
 import java.util.Calendar
-import kotlinx.io.IOException
-
+import java.io.IOException
 
 class NovaPersonaFragment : Fragment(), DatePickerDialog.OnDateSetListener {
-    // 41:24:49 N
+    // 41:24:51 N
     // 2:08:33 E
     private var btGravar: Button? = null
     private var etNom: EditText? = null
@@ -32,7 +27,7 @@ class NovaPersonaFragment : Fragment(), DatePickerDialog.OnDateSetListener {
     private var rutaPersones = ""
 
     companion object {
-        fun newInstance() = NovaPersonaFragment()
+        //fun newInstance() = NovaPersonaFragment()
         const val TAG = "NovaPersonaFragment"
     }
 
@@ -70,18 +65,17 @@ class NovaPersonaFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         val adaptador3 = ArrayAdapter(context!!, android.R.layout.simple_spinner_item, zones)
         spZona!!.adapter = adaptador3
 
-        etDia!!.setOnFocusChangeListener(View.OnFocusChangeListener { _, hasFocus ->
+        etDia!!.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 mostraDialegDia()
-
             }
-        })
+        }
 
-        etHora!!.setOnFocusChangeListener(View.OnFocusChangeListener { _, hasFocus ->
+        etHora!!.setOnFocusChangeListener{ _, hasFocus ->
             if (hasFocus) {
                 mostraDialegHora()
             }
-        })
+        }
 
         btGravar!!.setOnClickListener {
             gravarPersona()
@@ -90,12 +84,15 @@ class NovaPersonaFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         return retView
     }
 
+    /*
+    @Deprecated("Deprecated in Java")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(NovaPersonaViewModel::class.java)
     }
+    */
 
-    fun gravarPersona () {
+    private fun gravarPersona () {
         val dades: String = viewModel.gravarNatal(
             etNom!!.text.toString(),
             etDia!!.text.toString(),
@@ -191,7 +188,7 @@ class NovaPersonaFragment : Fragment(), DatePickerDialog.OnDateSetListener {
     }
     */
 
-    fun mostraDialegDia() {
+    private fun mostraDialegDia() {
         //val fragmentDia = FragmentDia()
         //fragmentDia.show(fragmentManager, "selectorDia")
         val ara = Calendar.getInstance()
@@ -199,7 +196,7 @@ class NovaPersonaFragment : Fragment(), DatePickerDialog.OnDateSetListener {
             val any = ara.get(Calendar.YEAR)
             val mes = ara.get(Calendar.MONTH)
             val dia = ara.get(Calendar.DAY_OF_MONTH)
-            DatePickerDialog(activity, DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+            DatePickerDialog(activity!!.applicationContext, { _, year, monthOfYear, dayOfMonth ->
                 val dataDeNaixement = String.format("%02d", dayOfMonth) + "/" +
                         String.format("%02d", monthOfYear + 1) + "/" +
                         String.format("%02d", year)
@@ -208,7 +205,7 @@ class NovaPersonaFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         }
         else
         {
-            DatePickerDialog(activity, DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+            DatePickerDialog(activity!!.applicationContext, { _, year, monthOfYear, dayOfMonth ->
                 val dataDeNaixement = String.format("%02d", dayOfMonth) + "/" +
                         String.format("%02d", monthOfYear + 1) + "/" +
                         String.format("%02d", year)
@@ -219,9 +216,11 @@ class NovaPersonaFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         }
     }
 
-     fun mostraDialegHora() {
+     private fun mostraDialegHora() {
          val ara = Calendar.getInstance()
          if (etHora!!.text.isEmpty()) {
+             // Not resolved com.kovachcode:timePickerWithSeconds:1.0.1, will implement it
+             /*
              val mTimePicker = MyTimePickerDialog(
                  this.context, object : MyTimePickerDialog.OnTimeSetListener {
                      override fun onTimeSet(view: TimePicker, hourOfDay: Int, minute: Int, seconds: Int) {
@@ -236,9 +235,12 @@ class NovaPersonaFragment : Fragment(), DatePickerDialog.OnDateSetListener {
                  true
              )
              mTimePicker.show()
+             */
          }
          else
          {
+             // Not resolved com.kovachcode:timePickerWithSeconds:1.0.1, will implement it
+             /*
              val mTimePicker = MyTimePickerDialog(
                  this.context, object : MyTimePickerDialog.OnTimeSetListener {
                      override fun onTimeSet(view: TimePicker, hourOfDay: Int, minute: Int, seconds: Int) {
@@ -253,15 +255,16 @@ class NovaPersonaFragment : Fragment(), DatePickerDialog.OnDateSetListener {
                  true
              )
              mTimePicker.show()
+             */
          }
      }
 
-    fun guardaDia(any: Int, mes: Int, dia: Int) {
-        val diaS = Integer.toString(dia)
-        val mesS = Integer.toString(mes + 1)
-        val anyS = Integer.toString(any)
+    private fun guardaDia(any: Int, mes: Int, dia: Int) {
+        val diaS = dia.toString()
+        val mesS = (mes + 1).toString()
+        val anyS = any.toString()
         val etDia: TextView = retView!!.findViewById(R.id.etDia)
-        etDia.setText("$diaS/$mesS/$anyS")
+        etDia.text = "$diaS/$mesS/$anyS"
     }
 
     /*
@@ -275,18 +278,17 @@ class NovaPersonaFragment : Fragment(), DatePickerDialog.OnDateSetListener {
     */
 
     private fun traduir(nomOriginal: String): String {
-        var nomTraduit: String
-        when (nomOriginal) {
-            "Sun" -> nomTraduit = resources.getString(R.string.sol)
-            "Moon" -> nomTraduit = resources.getString(R.string.lluna)
-            "Mercury" -> nomTraduit = resources.getString(R.string.mercuri)
-            "Mars" -> nomTraduit = resources.getString(R.string.mart)
-            "Jupiter" -> nomTraduit = resources.getString(R.string.jupiter)
-            "Saturn" -> nomTraduit = resources.getString(R.string.saturn)
-            "Uranus" -> nomTraduit = resources.getString(R.string.ura)
-            "Neptune" -> nomTraduit = resources.getString(R.string.neptu)
-            "Pluto" -> nomTraduit = resources.getString(R.string.pluto)
-            else -> nomTraduit = nomOriginal
+        val nomTraduit: String = when (nomOriginal) {
+            "Sun" -> resources.getString(R.string.sol)
+            "Moon" -> resources.getString(R.string.lluna)
+            "Mercury" -> resources.getString(R.string.mercuri)
+            "Mars" -> resources.getString(R.string.mart)
+            "Jupiter" -> resources.getString(R.string.jupiter)
+            "Saturn" -> resources.getString(R.string.saturn)
+            "Uranus" -> resources.getString(R.string.ura)
+            "Neptune" -> resources.getString(R.string.neptu)
+            "Pluto" -> resources.getString(R.string.pluto)
+            else -> nomOriginal
         }
         return nomTraduit
     }
