@@ -36,10 +36,10 @@ class CopiaAssets(private var pattern: String, private var ct: Context) {
                 val outFile = File(outdir, filename)
 
                 out = FileOutputStream(outFile)
-                //copyFile(`in`!!, out)
+                //copyFile(input!!, out)
                 input.copyTo(out, 1024)
                 input.close()
-                //`in` = null
+                //input = null
                 out.flush()
                 out.close()
                 //out = null
@@ -52,7 +52,7 @@ class CopiaAssets(private var pattern: String, private var ct: Context) {
 
     /*
     @Throws(IOException::class)
-    private fun copyFile(`in`: InputStream, out: OutputStream) {
+    private fun copyFile(input: InputStream, out: OutputStream) {
         val buffer = ByteArray(1024)
         var read: Int
         while ((read = in.read(buffer)) != -1) {

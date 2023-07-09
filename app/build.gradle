@@ -5,6 +5,7 @@ android {
     compileSdkVersion 33
     defaultConfig {
         applicationId "com.aldarius.horoscop"
+        namespace "com.aldarius.horoscop"
         minSdkVersion 15
         targetSdkVersion 33
         versionCode 1
@@ -16,6 +17,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    packagingOptions {
+        exclude 'META-INF/LICENSE.md'
+        exclude 'META-INF/LICENSE-notice.md'
     }
 }
 

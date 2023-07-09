@@ -11,7 +11,8 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:replace="android:theme">
 
-        <activity android:name=".Inicial">
+        <activity android:name=".Inicial"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

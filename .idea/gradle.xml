@@ -17,6 +17,7 @@
             <option value="$PROJECT_DIR$/features/novapersona" />
             <option value="$PROJECT_DIR$/features/transits" />
             <option value="$PROJECT_DIR$/swisseph" />
+            <option value="$PROJECT_DIR$/timepicker" />
           </set>
         </option>
       </GradleProjectSettings>

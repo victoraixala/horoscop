@@ -1,1 +1,2 @@
 include ':app', ':features:novapersona', ':features:transits', ':common', ':swisseph'
+include ':timepicker'
