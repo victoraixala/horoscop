@@ -3,15 +3,27 @@ apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 33
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+
     defaultConfig {
         applicationId "com.aldarius.horoscop"
         namespace "com.aldarius.horoscop"
-        minSdkVersion 15
+        missingDimensionStrategy 'packageId', applicationId
+        minSdkVersion 21
         targetSdkVersion 33
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -19,24 +31,35 @@ android {
         }
     }
     packagingOptions {
-        exclude 'META-INF/LICENSE.md'
-        exclude 'META-INF/LICENSE-notice.md'
+        resources {
+            excludes += ['META-INF/LICENSE.md', 'META-INF/LICENSE-notice.md']
+        }
     }
 }
 
-repositories {
-    maven { url "https://kotlin.bintray.com/kotlinx" }
-    mavenCentral()
-}
+//repositories {
+//    maven { url "https://kotlin.bintray.com/kotlinx" }
+//    mavenCentral()
+//}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':common')
     implementation project(':features:novapersona')
+    //{
+    //    packageId "com.aldarius.horoscop.novapersona"
+    //}
     implementation project(':features:transits')
+    //{
+    //    packageId "com.aldarius.horoscop.transits"
+    //}
+    implementation project(':timepicker')
+    //{
+    //    packageId "com.aldarius.horoscop.timepicker"
+    //}
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'androidx.core:core-ktx:1.10.0'
+    implementation 'androidx.core:core-ktx:1.10.1'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test:runner:1.5.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    //implementation 'com.kovachcode.timePickerWithSeconds:timepickerwithseconds:1.0.1'
 }

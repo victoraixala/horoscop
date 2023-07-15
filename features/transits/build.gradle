@@ -4,15 +4,26 @@ apply plugin: 'kotlin-android'
 android {
     compileSdkVersion 33
 
-    packagingOptions {
-        exclude 'META-INF/LICENSE.md'
-        exclude 'META-INF/LICENSE-notice.md'
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
-    defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 33
+    kotlinOptions {
+        jvmTarget = '17'
+    }
 
+    packagingOptions {
+        resources {
+            excludes += ['META-INF/LICENSE.md', 'META-INF/LICENSE-notice.md']
+        }
+    }
+
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 33
+        //packageId "com.aldarius.horoscop.transits"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
@@ -23,6 +34,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    namespace 'com.aldarius.horoscop.transits'
 
 }
 

@@ -4,15 +4,26 @@ apply plugin: 'kotlin-android'
 android {
     compileSdkVersion 33
 
-    packagingOptions {
-        exclude 'META-INF/LICENSE.md'
-        exclude 'META-INF/LICENSE-notice.md'
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
-    defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 33
+    kotlinOptions {
+        jvmTarget = '17'
+    }
 
+    packagingOptions {
+        resources {
+            excludes += ['META-INF/LICENSE.md', 'META-INF/LICENSE-notice.md']
+        }
+    }
+
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 33
+        //packageId "com.aldarius.horoscop.novapersona"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
@@ -23,6 +34,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    namespace 'com.aldarius.horoscop.novapersona'
 
 }
 
@@ -34,8 +46,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
-    //implementation 'com.kovachcode:timePickerWithSeconds:1.0.1'
-    //implementation 'com.kovachcode.timePickerWithSeconds:timepickerwithseconds:1.0.1'
+    implementation project(path: ':timepicker')
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test:runner:1.5.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
