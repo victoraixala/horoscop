@@ -1,8 +1,6 @@
 package com.aldarius.common
 
-import kotlinx.serialization.*
 
-@Serializable
 data class Posicio (
     var entitat: String = "",
     var momentInicial: String = "",

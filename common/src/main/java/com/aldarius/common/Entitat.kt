@@ -1,8 +1,5 @@
 package com.aldarius.common
 
-import kotlinx.serialization.*
-
-@Serializable
 data class Entitat(val nom: String,
                    val grau: Double,
                    var retrograd: String,

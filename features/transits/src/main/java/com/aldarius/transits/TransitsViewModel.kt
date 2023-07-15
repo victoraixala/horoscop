@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import com.aldarius.common.*
 import java.io.*
 import java.util.*
-import kotlinx.serialization.json.Json
 import swisseph.SweConst
 import swisseph.SweDate
 import swisseph.SwissEph
@@ -92,7 +91,7 @@ class TransitsViewModel : ViewModel() {
                 // oPosicions és el contingut del JSON
                 val oPosicions = ois.readObject() as String
                 // p és la instància de l'objecte Posicions
-                posicions = Json.parse(Posicions.serializer(), oPosicions)
+                //posicions = Json.parse(Posicions.serializer(), oPosicions)
                 ois.close()
                 fitxerSER.close()
                 posicions.posicions = gravarPosicions(
@@ -139,7 +138,7 @@ class TransitsViewModel : ViewModel() {
                     ruta)
                 val fitxerSER = FileOutputStream(ruta + "/posicions.ser")
                 val oos = ObjectOutputStream(fitxerSER)
-                oos.writeObject(Json.stringify(Posicions.serializer(), posicions))
+                //oos.writeObject(Json.stringify(Posicions.serializer(), posicions))
                 oos.close()
                 fitxerSER.close()
                 println("Posicions gravades")
@@ -538,7 +537,7 @@ class TransitsViewModel : ViewModel() {
             // oPersona és el contingut del JSON
             val oPersona = ois.readObject() as String
             // p és la instància de l'objecte Persona
-            persona = Json.parse(Persona.serializer(), oPersona)
+            //persona = Json.parse(Persona.serializer(), oPersona)
             ois.close()
             fitxerSER.close()
             return persona

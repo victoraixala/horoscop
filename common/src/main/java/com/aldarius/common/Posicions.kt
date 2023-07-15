@@ -1,8 +1,6 @@
 package com.aldarius.common
 
-import kotlinx.serialization.*
 
-@Serializable
 data class Posicions (
     var posicions : ArrayList<Posicio> = ArrayList()
 )

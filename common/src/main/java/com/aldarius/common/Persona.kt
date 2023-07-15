@@ -1,8 +1,5 @@
 package com.aldarius.common
 
-import kotlinx.serialization.*
-
-@Serializable
 class Persona (
     var nom: String = "",
     var dataNaixement: String = "",
