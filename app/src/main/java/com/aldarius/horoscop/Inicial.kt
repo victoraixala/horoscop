@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.aldarius.horoscop.novapersona.NovaPersonaFragment
-import com.aldarius.transits.TransitsFragment
+import com.aldarius.horoscop.transits.TransitsFragment
 import java.io.File
 import java.util.ArrayList
 

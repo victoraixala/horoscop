@@ -1,4 +1,4 @@
-package com.aldarius.transits
+package com.aldarius.horoscop.transits
 
 import android.Manifest
 import android.app.Activity
