@@ -1,4 +1,4 @@
-package com.aldarius.timepicker.view
+package com.aldarius.horoscop.timepicker.view
 
 import android.content.Context
 import android.os.Parcel
@@ -9,7 +9,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.NumberPicker
-import com.aldarius.timepicker.R
+import com.aldarius.horoscop.timepicker.R
 import java.lang.String.format
 import java.text.DateFormatSymbols
 import java.util.*
@@ -178,7 +178,7 @@ class TimePicker @JvmOverloads constructor(
         }
         */
 
-
+/*
         fun getHour(): Int {
             return hour
         }
@@ -186,6 +186,7 @@ class TimePicker @JvmOverloads constructor(
         fun getMinute(): Int {
             return minute
         }
+        */
 
         override fun writeToParcel(dest: Parcel, flags: Int) {
             super.writeToParcel(dest, flags)
@@ -222,10 +223,10 @@ class TimePicker @JvmOverloads constructor(
     override fun onRestoreInstanceState(state: Parcelable) {
         val ss = state as SavedState
         super.onRestoreInstanceState(ss.superState)
-        mCurrentHour = ss.getHour()
-        mCurrentMinute = ss.getMinute()
-        //mCurrentHour = ss.hour
-        //mCurrentMinute = ss.minute
+        //mCurrentHour = ss.getHour()
+        //mCurrentMinute = ss.getMinute()
+        mCurrentHour = ss.hour
+        mCurrentMinute = ss.minute
     }
 
     /**

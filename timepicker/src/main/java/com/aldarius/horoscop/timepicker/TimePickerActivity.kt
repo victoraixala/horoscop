@@ -1,12 +1,12 @@
-package com.aldarius.timepicker
+package com.aldarius.horoscop.timepicker
 
 import android.app.Activity
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
 import android.widget.TextView
-import com.aldarius.timepicker.view.MyTimePickerDialog
-import com.aldarius.timepicker.view.TimePicker
+import com.aldarius.horoscop.timepicker.view.MyTimePickerDialog
+import com.aldarius.horoscop.timepicker.view.TimePicker
 import java.util.*
 
 
