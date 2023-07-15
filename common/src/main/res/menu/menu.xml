@@ -3,12 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools" >
     <item android:id="@+id/novaPersona"
         android:title="@string/novaPersona"
-        app:showAsAction="never" />
+        android:showAsAction="never"/>
     <item android:id="@+id/transits"
         android:title="@string/transits"
-        app:showAsAction="never" />
+        android:showAsAction="never" />
     <item android:id="@+id/action_settings"
         android:title="@string/action_settings"
         android:orderInCategory="100"
-        app:showAsAction="never" />
+        android:showAsAction="never" />
 </menu>
