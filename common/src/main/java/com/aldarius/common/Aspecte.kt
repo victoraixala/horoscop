@@ -1,9 +1,7 @@
 package com.aldarius.common
 
-import kotlinx.serialization.*
 //import java.util.*
 
-@Serializable
 data class Aspecte(val ePersona: Entitat,
                    val tipusAspecte: Double,
                    val eActual: Entitat,
