@@ -1,12 +1,20 @@
-package com.aldarius.novapersona
+package com.aldarius.horoscop.novapersona
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
+import com.aldarius.horoscop.novapersona.R
+import com.aldarius.horoscop.timepicker.view.MyTimePickerDialog
+import com.aldarius.horoscop.timepicker.view.TimePicker
+import com.aldarius.horoscop.novapersona.NovaPersonaViewModel
 import java.util.Calendar
 import java.io.IOException
 
@@ -39,8 +47,8 @@ class NovaPersonaFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         savedInstanceState: Bundle?
     ): View? {
         retView = inflater.inflate(R.layout.nova_persona_fragment, container, false)
-        rutaAssets = arguments!!.getString("rutaAssets")!!
-        rutaPersones = arguments!!.getString("rutaPersones")!!
+        rutaAssets = requireArguments().getString("rutaAssets")!!
+        rutaPersones = requireArguments().getString("rutaPersones")!!
         val ns = arrayOf("N", "S")
         val ew = arrayOf("E", "W")
         val zones = arrayOf("+01:00", "+00:00", "+02:00", "+03:00", "+03:30", "+04:00", "+04:30", "+05:00", "+05:30", "+05:45", "+06:00", "+06:30", "+07:00", "+08:00", "+08:30", "+08:45", "+09:00", "+09:30", "+10:00", "+10:30", "+11:00", "+11:30", "+12:00", "+12:45", "+13:00", "+14:00", "-01:00", "-02:00", "-02:30", "-03:00", "-03:30", "-04:00", "-04:30", "-05:00", "-06:00", "-07:00", "-08:00", "-09:00", "-09:30", "-10:00", "-11:00", "-12:00")
@@ -56,13 +64,13 @@ class NovaPersonaFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         spZona = retView!!.findViewById(R.id.spZona)
         btGravar = retView!!.findViewById(R.id.btGravar)
 
-        val adaptador1 = ArrayAdapter(context!!, android.R.layout.simple_spinner_item, ns)
+        val adaptador1 = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, ns)
         spNS!!.adapter = adaptador1
 
-        val adaptador2 = ArrayAdapter(context!!, android.R.layout.simple_spinner_item, ew)
+        val adaptador2 = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, ew)
         spEW!!.adapter = adaptador2
 
-        val adaptador3 = ArrayAdapter(context!!, android.R.layout.simple_spinner_item, zones)
+        val adaptador3 = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, zones)
         spZona!!.adapter = adaptador3
 
         etDia!!.setOnFocusChangeListener { _, hasFocus ->
@@ -84,13 +92,12 @@ class NovaPersonaFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         return retView
     }
 
-    /*
+
     @Deprecated("Deprecated in Java")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(NovaPersonaViewModel::class.java)
+        this.viewModel = ViewModelProviders.of(this).get(NovaPersonaViewModel::class.java)
     }
-    */
 
     private fun gravarPersona () {
         val dades: String = viewModel.gravarNatal(
@@ -107,19 +114,21 @@ class NovaPersonaFragment : Fragment(), DatePickerDialog.OnDateSetListener {
             rutaPersones
         )
         // dades per informar (totes obligatories):
-        // etNom
-        // dia de naixement (calendari)
-        // hora de naixement
-        // latitud (N/S)
-        // longitud (E/W)
-        // altitud (metres)
+        //etNom!!.text = "Víctor Aixalà"
+        //etDia!!.text = "16/2/1982"
+        //etHora!!.text = "12:39:38"
+        //etLatitud!!.text = "41:24:51"
+        //etLongitud!!.text = "2:8:33"
+        //etAltitud!!.text = "148"
         // zona horària
         try {
+            /*
             viewModel.gravarPersona(
                 rutaPersones,
                 etNom!!.text.toString() + ".txt",
                 dades
             )
+            */
             Toast.makeText(
                 this.context,
                 R.string.dadesGravadesOut,
@@ -138,14 +147,22 @@ class NovaPersonaFragment : Fragment(), DatePickerDialog.OnDateSetListener {
             etLongitud!!.setText("")
             etAltitud!!.setText("")
             */
+            println(dades)
         }
         catch (e: IOException) {
             e.printStackTrace()
             Toast.makeText(this.context,R.string.dadesNoGravades,Toast.LENGTH_SHORT).show()
+            println(dades)
             }
     }
-
-
+    /*
+        etNom!!.text = "Víctor Aixalà"
+        etDia!!.text = "16/2/1982"
+        etHora!!.text = "12:39:38"
+        etLatitud!!.text = "41:24:51"
+        etLongitud!!.text = "2:8:33"
+        etAltitud!!.text = "148"
+    */
     /*
     fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -196,16 +213,23 @@ class NovaPersonaFragment : Fragment(), DatePickerDialog.OnDateSetListener {
             val any = ara.get(Calendar.YEAR)
             val mes = ara.get(Calendar.MONTH)
             val dia = ara.get(Calendar.DAY_OF_MONTH)
-            DatePickerDialog(activity!!.applicationContext, { _, year, monthOfYear, dayOfMonth ->
+            println("context: " + requireActivity().applicationContext)
+            println("activity: " + requireActivity())
+            println("dia: " + dia)
+            println("mes: " + mes)
+            println("any: " + any)
+            //DatePickerDialog(activity!!.applicationContext, { _, year, monthOfYear, dayOfMonth ->
+            DatePickerDialog(requireActivity(), { _, year, monthOfYear, dayOfMonth ->
                 val dataDeNaixement = String.format("%02d", dayOfMonth) + "/" +
                         String.format("%02d", monthOfYear + 1) + "/" +
-                        String.format("%02d", year)
+                        String.format("%04d", year)
                 etDia!!.setText(dataDeNaixement)
-            }, any, mes, dia).show()
+                //}, any, mes, dia).show()
+            }, 1982, 2, 16).show()
         }
         else
         {
-            DatePickerDialog(activity!!.applicationContext, { _, year, monthOfYear, dayOfMonth ->
+            DatePickerDialog(requireActivity().applicationContext, { _, year, monthOfYear, dayOfMonth ->
                 val dataDeNaixement = String.format("%02d", dayOfMonth) + "/" +
                         String.format("%02d", monthOfYear + 1) + "/" +
                         String.format("%02d", year)
@@ -219,31 +243,31 @@ class NovaPersonaFragment : Fragment(), DatePickerDialog.OnDateSetListener {
      private fun mostraDialegHora() {
          val ara = Calendar.getInstance()
          if (etHora!!.text.isEmpty()) {
-             // Not resolved com.kovachcode:timePickerWithSeconds:1.0.1, will implement it
-             /*
+
              val mTimePicker = MyTimePickerDialog(
-                 this.context, object : MyTimePickerDialog.OnTimeSetListener {
-                     override fun onTimeSet(view: TimePicker, hourOfDay: Int, minute: Int, seconds: Int) {
+                 this.requireContext(), object : MyTimePickerDialog.OnTimeSetListener {
+                     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int, seconds: Int) {
                          val hora = String.format("%02d", hourOfDay) +
                                  ":" + String.format("%02d", minute) +
                                  ":" + String.format("%02d", seconds)
                          etHora!!.setText(hora)
                      }
-                 }, ara.get(Calendar.HOUR_OF_DAY),
-                 ara.get(Calendar.MINUTE),
-                 ara.get(Calendar.SECOND),
+                 //}, ara.get(Calendar.HOUR_OF_DAY),
+                 //ara.get(Calendar.MINUTE),
+                 //ara.get(Calendar.SECOND),
+                     }, 12,
+                 39,
+                 38,
                  true
              )
              mTimePicker.show()
-             */
+
          }
          else
          {
-             // Not resolved com.kovachcode:timePickerWithSeconds:1.0.1, will implement it
-             /*
              val mTimePicker = MyTimePickerDialog(
-                 this.context, object : MyTimePickerDialog.OnTimeSetListener {
-                     override fun onTimeSet(view: TimePicker, hourOfDay: Int, minute: Int, seconds: Int) {
+                 this.requireContext(), object : MyTimePickerDialog.OnTimeSetListener {
+                     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int, seconds: Int) {
                          val hora = String.format("%02d", hourOfDay) +
                                  ":" + String.format("%02d", minute) +
                                  ":" + String.format("%02d", seconds)
@@ -255,14 +279,14 @@ class NovaPersonaFragment : Fragment(), DatePickerDialog.OnDateSetListener {
                  true
              )
              mTimePicker.show()
-             */
+
          }
      }
 
-    private fun guardaDia(any: Int, mes: Int, dia: Int) {
-        val diaS = dia.toString()
-        val mesS = (mes + 1).toString()
-        val anyS = any.toString()
+    private fun guardaDia(dia: Int, mes: Int, any: Int) {
+        val diaS = String.format("%02d",dia)
+        val mesS = String.format("%02d",(mes + 1))
+        val anyS = String.format("%04d",any)
         val etDia: TextView = retView!!.findViewById(R.id.etDia)
         etDia.text = "$diaS/$mesS/$anyS"
     }
@@ -296,6 +320,6 @@ class NovaPersonaFragment : Fragment(), DatePickerDialog.OnDateSetListener {
     override fun onDateSet(view: DatePicker, any: Int, mes: Int, dia: Int) {
         //val fragment = parentFragment as NovaPersonaFragment
         //val fragment = fragmentManager?.findFragmentByTag(NovaPersonaFragment.TAG) as? NovaPersonaFragment
-        guardaDia(any, mes, dia)
+        guardaDia(dia, mes, any)
     }
 }

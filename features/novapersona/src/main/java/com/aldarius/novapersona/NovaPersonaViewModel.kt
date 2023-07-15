@@ -1,10 +1,10 @@
-package com.aldarius.novapersona
+package com.aldarius.horoscop.novapersona
 
 import android.text.TextUtils.indexOf
 import androidx.lifecycle.ViewModel
 import com.aldarius.common.Entitat
 import com.aldarius.common.Persona
-import kotlinx.serialization.json.Json
+import com.aldarius.horoscop.novapersona.R
 import swisseph.SweConst
 import swisseph.SweConst.SE_AST_OFFSET
 import swisseph.SweDate
@@ -46,10 +46,10 @@ class NovaPersonaViewModel : ViewModel() {
         /*
         etNom!!.text = "Víctor Aixalà"
         etDia!!.text = "16/2/1982"
-        etHora!!.text = "12:45:00"
-        etLatitud!!.text = "41:24:49"
+        etHora!!.text = "12:39:38"
+        etLatitud!!.text = "41:24:51"
         etLongitud!!.text = "2:8:33"
-        etAltitud!!.text = "129"
+        etAltitud!!.text = "148"
         */
         tNom = etNom
         tDia = etDia
@@ -854,9 +854,9 @@ class NovaPersonaViewModel : ViewModel() {
         osw.close()
         // fitxer SER
         val fitxerSER = FileOutputStream(tRutaPersones + "/" + nomFitxer + ".ser")
-        val oos = ObjectOutputStream(fitxerSER)
-        oos.writeObject(Json.stringify(Persona.serializer(), persona))
-        oos.close()
+        //val oos = ObjectOutputStream(fitxerSER)
+        //oos.writeObject(Json.stringify(Persona.serializer(), persona))
+        //oos.close()
         fitxerSER.close()
     }
 

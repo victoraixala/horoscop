@@ -2,23 +2,15 @@ package com.aldarius.horoscop
 
 import android.content.DialogInterface
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import androidx.viewpager.widget.ViewPager
-import com.aldarius.novapersona.NovaPersonaFragment
+import com.aldarius.horoscop.novapersona.NovaPersonaFragment
 import com.aldarius.transits.TransitsFragment
 import java.io.File
 import java.util.ArrayList
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-
-
-
 
 class Inicial : AppCompatActivity() {
     private lateinit var positiveButtonClick: (DialogInterface, Int) -> Unit
