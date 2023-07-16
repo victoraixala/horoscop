@@ -1,7 +1,11 @@
 package com.aldarius.horoscop.transits
 
 import androidx.lifecycle.ViewModel
-import com.aldarius.common.*
+import com.aldarius.horoscop.common.Aspecte
+import com.aldarius.horoscop.common.Entitat
+import com.aldarius.horoscop.common.Persona
+import com.aldarius.horoscop.common.Posicio
+import com.aldarius.horoscop.common.Posicions
 import java.io.*
 import java.util.*
 import swisseph.SweConst

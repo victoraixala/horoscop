@@ -1,4 +1,4 @@
-package com.aldarius.common
+package com.aldarius.horoscop.common
 
 class Detall(nom: String, id: Int, imatge: Int) {
     var nom = ""

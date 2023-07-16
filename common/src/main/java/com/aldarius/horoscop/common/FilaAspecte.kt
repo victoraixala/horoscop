@@ -1,4 +1,4 @@
-package com.aldarius.common
+package com.aldarius.horoscop.common
 
 import java.util.*
 

@@ -1,17 +1,12 @@
 package com.aldarius.horoscop.novapersona
 
-import android.text.TextUtils.indexOf
 import androidx.lifecycle.ViewModel
-import com.aldarius.common.Entitat
-import com.aldarius.common.Persona
-import com.aldarius.horoscop.novapersona.R
+import com.aldarius.horoscop.common.Persona
 import swisseph.SweConst
-import swisseph.SweConst.SE_AST_OFFSET
 import swisseph.SweDate
 import swisseph.SwissEph
 import java.io.File
 import java.io.FileOutputStream
-import java.io.ObjectOutputStream
 import java.io.OutputStreamWriter
 
 

@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 //import androidx.lifecycle.ViewModelProviders
-import com.aldarius.common.Aspecte
-import com.aldarius.common.Persona
+import com.aldarius.horoscop.common.Aspecte
+import com.aldarius.horoscop.common.Persona
 //import kotlinx.android.synthetic.main.transits_fragment.*
 import java.text.SimpleDateFormat
 import java.util.*
