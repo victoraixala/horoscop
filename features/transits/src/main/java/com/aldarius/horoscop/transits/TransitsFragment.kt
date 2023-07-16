@@ -5,12 +5,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
-//import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.aldarius.horoscop.common.Aspecte
 import com.aldarius.horoscop.common.Persona
-//import kotlinx.android.synthetic.main.transits_fragment.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.abs
@@ -18,7 +21,7 @@ import kotlin.math.abs
 
 class TransitsFragment : Fragment() {
 
-    private lateinit var viewModel: TransitsViewModel
+    private lateinit var transitsViewModel: TransitsViewModel
     private var retView: View? = null
     private var rutaAssets: String? = null
     private var rutaPersones: String? = null
@@ -31,6 +34,11 @@ class TransitsFragment : Fragment() {
     private var strLatitud: String = ""
     private var strLongitud: String = ""
     private var strAltitud: String = ""
+    private var spPersones: Spinner? = null
+    private var tvLatitud: TextView? = null
+    private var tvLongitud: TextView? = null
+    private var tvAltitud: TextView? = null
+    private var tvZona: TextView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,27 +47,24 @@ class TransitsFragment : Fragment() {
         retView = inflater.inflate(R.layout.transits_fragment, container, false)
         rutaAssets = requireArguments().getString("rutaAssets")
         rutaPersones = requireArguments().getString("rutaPersones")
-        return retView
-    }
+        transitsViewModel = ViewModelProvider(this)[TransitsViewModel::class.java]
+        transitsViewModel.fitxerPosicions(rutaAssets!!)
+        persones = transitsViewModel.recuperarPersones(rutaPersones!!)
 
-    @Deprecated("Deprecated in Java")
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this)[TransitsViewModel::class.java]
-        viewModel.fitxerPosicions(rutaAssets!!)
-        persones = viewModel.recuperarPersones(rutaPersones!!)
+        val adaptador1 = ArrayAdapter(this.requireContext(), android.R.layout.simple_spinner_item,
+            persones!!
+        )
+        spPersones = retView!!.findViewById(R.id.spPersones)
+        spPersones!!.adapter = adaptador1
 
-        //val adaptador1 = ArrayAdapter(this.context, android.R.layout.simple_spinner_item, persones)
-        //spPersones!!.adapter = adaptador1
-
-        //persona = viewModel.carregarPersona(
-            //rutaPersones.toString(),
-            //spPersones!!.selectedItem.toString())
+        persona = transitsViewModel.carregarPersona(
+            rutaPersones.toString(),
+            spPersones!!.selectedItem.toString())
 
         // dia i hora
-        val c = Calendar.getInstance()
-        val df = SimpleDateFormat("dd-MM-yyyy HH:mm:ss")
-        val moment = df.format(c.time)
+        val diaHora = Calendar.getInstance()
+        val df = SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault())
+        val moment = df.format(diaHora.time)
 
         // localització del dispositiu
         var carregat = false
@@ -82,7 +87,7 @@ class TransitsFragment : Fragment() {
                     // TODO poder canviar la zona horària a una altra diferent del naixement
                     // dia/hora, latitud, longitud, altitud i zona horària
                     carregat = true
-                    posicionsActuals = viewModel.calcular(
+                    posicionsActuals = transitsViewModel.calcular(
                         moment,
                         latitud!!,
                         longitud!!,
@@ -90,7 +95,7 @@ class TransitsFragment : Fragment() {
                         persona!!.zona
                     )
 
-                    val aspectes = viewModel.buscarAspectes(persona!!, posicionsActuals!!)
+                    val aspectes = transitsViewModel.buscarAspectes(persona!!, posicionsActuals!!)
                     aspectes.sortedWith(compareBy { it.momentExacte })
                     mostrarAspectes(aspectes)
                 }
@@ -98,7 +103,9 @@ class TransitsFragment : Fragment() {
         }
         val myLocation = MyLocation()
         myLocation.getLocation(requireContext(), locationResult)
+        return retView
     }
+
     /*
 0 = {Aspecte@5059} "Aspecte(ePersona=Entitat(nom=AC, grau=77.4388753935382, retrograd= , tipus=Angle, casa=), tipusAspecte=180.0, eActual=Entitat(nom=Jupiter, grau=259.2545115334745, retrograd=D, tipus=Planeta, casa=C7), distancia=1.8156361399363163, apliSepa=S, momentExacte=20190925081606, grauExacteActual=257.4388762574469)"
 1 = {Aspecte@5060} "Aspecte(ePersona=Entitat(nom=AC, grau=77.4388753935382, retrograd= , tipus=Angle, casa=), tipusAspecte=270.0, eActual=Entitat(nom=Neptune, grau=346.5754378550603, retrograd=D, tipus=Planeta, casa=C10), distancia=-0.8634375384779105, apliSepa=S, momentExacte=20190411061824, grauExacteActual=347.4388750638575)"
@@ -169,32 +176,24 @@ class TransitsFragment : Fragment() {
 
     fun mostrarAspectes(aspectes: ArrayList<Aspecte>) {
 
-        //tvLatitud.text = strLatitud
-        //tvLongitud.text = strLongitud
-        //tvAltitud.text = strAltitud
+        tvLatitud?.text = strLatitud
+        tvLongitud?.text = strLongitud
+        tvAltitud?.text = strAltitud
 
-        /*
-        // zona: +xx:00
-        persona!!.zona
-        var zona = java.lang.Double.parseDouble(zona.substring(0, 3))
-        when (zona.substring(4, 6)) {
-            "30" -> zona += 0.5
-            "45" -> zona += 0.75
-        }
-        */
+        val zonaSencer = persona!!.zona.toInt()
+        val zonaDecimal = (persona!!.zona - zonaSencer) * 60
 
-        //omplirLlista(aspectes)
+        val zona = String.format("%02d:%02d", zonaSencer, zonaDecimal.toInt())
+        tvZona?.text = zona
+
+        omplirLlista(aspectes)
     }
 
-    /*
-    fun omplirLlista(aspectes: ArrayList<Aspecte>): HashMap<String?, List<String?>?>? {
-        var expandableListDetail: HashMap<String?, List<String?>?>? = null
+
+    fun omplirLlista(aspectes: ArrayList<Aspecte>) {
         /*
-        http://www.apnatutorials.com/android/expandable-listview-customization-and-usage.php?categoryId=2&subCategoryId=57&myPath=android/expandable-listview-customization-and-usage.php
-        */
         for (a in aspectes) {
             val cAspecte: Unit
-            cAspecte
 
             val dAspecte: ArrayList<String>? = null
             dAspecte!!.add(a.momentInicial)
@@ -210,9 +209,16 @@ class TransitsFragment : Fragment() {
             dAspecte.add(a.ePersona.retrograd)
             //dAspecte.add(a.ePersona.grau.toString())
             dAspecte.add(a.distancia.toString())
-            expandableListDetail!!.put(cAspecte, dAspecte)
         }
-            return expandableListDetail
+        */
+
+        val recyclerView: RecyclerView = retView!!.findViewById(R.id.aspectes)
+
+        val layoutManager = LinearLayoutManager(requireContext())
+        val adapter = AspecteAdapter(aspectes)
+
+        recyclerView.layoutManager = layoutManager
+        recyclerView.adapter = adapter
     }
-     */
+
 }

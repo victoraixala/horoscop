@@ -1,7 +1,5 @@
 package com.aldarius.horoscop.common
 
-//import java.util.*
-
 data class Aspecte(val ePersona: Entitat,
                    val tipusAspecte: Double,
                    val eActual: Entitat,
